@@ -18,7 +18,7 @@ public class unrollWindow extends JFrame implements ActionListener{
 
 	private JDesktopPane unrollWindow = new JDesktopPane();
 	private buttonCL buttonUnrolling = new buttonCL("Unroll");
-
+	private buttonCL buttonClose = new buttonCL("Close");
 	
 	
 		public unrollWindow( String uWusername,  String uWpassword){
@@ -43,7 +43,8 @@ public class unrollWindow extends JFrame implements ActionListener{
 				setResizable(false);
 				setVisible(true);
 				
-				
+				getUnrollWindow().add(buttonUnrolling, BorderLayout.SOUTH);
+				getUnrollWindow().add(buttonClose, BorderLayout.SOUTH);
 				
 				
 				pack(); 
@@ -86,11 +87,11 @@ public class unrollWindow extends JFrame implements ActionListener{
 
 
 
-		@Override //Login Comparison
+		
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getActionCommand().equals("OK")){
-				
+			if(e.getActionCommand().equals("Close")){
+				dispose();
 		}
 
 		

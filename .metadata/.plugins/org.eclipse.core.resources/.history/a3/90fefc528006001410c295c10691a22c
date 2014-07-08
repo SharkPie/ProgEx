@@ -1,0 +1,3 @@
+url=jdbc:mysql://10.53.163.21:3306/student_administration
+username=dominik
+password=

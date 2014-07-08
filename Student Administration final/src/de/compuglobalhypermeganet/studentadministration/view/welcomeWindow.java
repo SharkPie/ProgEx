@@ -94,7 +94,7 @@ import de.compuglobalhypermeganet.studentadministration.model.textfieldCL;
 				setResizable(false);
 				setVisible(true);
 				
-				setsPane(new String [20][2]);
+				setsPane(new String [30][2]);
 				String[][] eeData = JdbcTemplate.getInstance().getEnroledExam(usr, pwd);
 				setsPane(eeData);
 				
@@ -194,7 +194,7 @@ import de.compuglobalhypermeganet.studentadministration.model.textfieldCL;
 			}
 
 			public void setsPane(String[][] data) {
-				String[] col_names = {"Last_Name","Course_Name"};
+				String[] col_names = {"Last Name","Course Name"};
 				JTable table = new JTable(data, col_names);
 				sPane = new JScrollPane( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 				sPane.setViewportView(table);

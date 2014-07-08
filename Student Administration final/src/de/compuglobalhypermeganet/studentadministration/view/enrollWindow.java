@@ -35,20 +35,23 @@ public class enrollWindow extends JFrame implements ActionListener{
 
 	private JDesktopPane enrollWindow = new JDesktopPane();
 	private buttonCL buttonEnrolling = new buttonCL("Enroll");
-
+	private buttonCL buttonClose = new buttonCL("Close");
+	
+	private JScrollPane sPane;
+	public static String usr = null;
+	public static String pwd = null;
+	
+	
 		public enrollWindow( String eWusername,  String eWpassword){
+			usr=eWusername;
+			pwd=eWpassword;
 			
-			/*	try {
-					UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-					SwingUtilities.updateComponentTreeUI(this);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-				} 
-			*/	
 			
-				
-				
-				
+			
+			
+			
+			
+						
 				setLayout(new BorderLayout(100, 100));
 			
 				getEnrollWindow().setLayout(new GridLayout(5, 1, 10, 10));
@@ -58,7 +61,8 @@ public class enrollWindow extends JFrame implements ActionListener{
 				setResizable(false);
 				setVisible(true);
 				
-				
+				getEnrollWindow().add(buttonEnrolling, BorderLayout.SOUTH);
+				getEnrollWindow().add(buttonClose, BorderLayout.SOUTH);
 				
 				
 				pack(); 
@@ -66,6 +70,7 @@ public class enrollWindow extends JFrame implements ActionListener{
 							
 				//Button Listener
 				buttonEnrolling.addActionListener(this);
+				buttonClose.addActionListener(this);
 			
 				
 				
@@ -85,27 +90,26 @@ public class enrollWindow extends JFrame implements ActionListener{
 			this.enrollWindow = enrollWindow;
 		}
 
-
-	
 		public buttonCL getButtonEnrolling() {
 			return buttonEnrolling;
 		}
-
-
-
 
 		public void setButtonEnrolling(buttonCL buttonEnrolling) {
 			this.buttonEnrolling = buttonEnrolling;
 		}
 
+		public buttonCL getButtonClose() {
+			return buttonClose;
+		}
 
+		public void setButtonClose(buttonCL buttonClose) {
+			this.buttonClose = buttonClose;
+		}
 
-
-		@Override //Login Comparison
 		public void actionPerformed(ActionEvent e) {
 			
-			if(e.getActionCommand().equals("OK")){
-				
+			if(e.getActionCommand().equals("Close")){
+				dispose();
 		}
 
 		

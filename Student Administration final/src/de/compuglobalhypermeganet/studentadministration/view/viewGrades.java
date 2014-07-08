@@ -9,7 +9,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JDesktopPane;
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
+import de.compuglobalhypermeganet.studentadministration.controller.JdbcTemplate;
 import de.compuglobalhypermeganet.studentadministration.model.buttonCL;
 
 
@@ -17,8 +20,11 @@ public class viewGrades extends JFrame implements ActionListener{
 	
 
 	private JDesktopPane viewGrades = new JDesktopPane();
-	private buttonCL buttonClose = new buttonCL("Close");
 
+	private buttonCL buttonClose = new buttonCL("Close");
+	private JScrollPane sPane;
+	public static String usr = null;
+	public static String pwd = null;
 	
 	
 		public viewGrades( String vGusername,  String vGpassword){
@@ -30,19 +36,23 @@ public class viewGrades extends JFrame implements ActionListener{
 					e1.printStackTrace();
 				} 
 			*/	
-			
+			usr=vGusername;
+			pwd=vGpassword;
 				
-				
+				setsPane(new String [30][2]);
+				String[][] eeData = JdbcTemplate.getInstance().getviewGrades(usr, pwd);
+				setsPane(eeData);
 				
 				setLayout(new BorderLayout(100, 100));
 			
 				getViewGrades().setLayout(new GridLayout(5, 1, 10, 10));
 				add(viewGrades);
-		
+				
 				setTitle("Student Administration");		
 				setResizable(false);
 				setVisible(true);
 				
+				getViewGrades().add(sPane);
 				getViewGrades().add(buttonClose, BorderLayout.SOUTH);
 				
 				
@@ -67,27 +77,35 @@ public class viewGrades extends JFrame implements ActionListener{
 			return viewGrades;
 		}
 
-		public void setViewGrades(JDesktopPane unrollWindow) {
+		public void setViewGrades(JDesktopPane viewGrades) {
 			this.viewGrades = viewGrades;
 		}
 
-
-	
-		public buttonCL getButtonUnrolling() {
+		public buttonCL getButtonClose() {
 			return buttonClose;
 		}
 
 
+		public void setButtonClose(buttonCL buttonClose) {
+			this.buttonClose = buttonClose;
+		}
+	
+		
+		public JScrollPane getsPane() {
+			return sPane;
+		}
 
-
-		public void setButtonUnrolling(buttonCL buttonUnrolling) {
-			this.buttonClose = buttonUnrolling;
+		public void setsPane(String[][] data) {
+			String[] col_names = {"Course Name","Grade"};
+			JTable table = new JTable(data, col_names);
+			sPane = new JScrollPane( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+			sPane.setViewportView(table);
+			pack();
 		}
 
 
 
-
-		@Override //Login Comparison
+		
 		public void actionPerformed(ActionEvent e) {
 			
 			if(e.getActionCommand().equals("Close")){
