@@ -68,3 +68,7 @@ local.properties
 
 # TeXlipse plugin
 .texlipse
+
+
+#eigene
+.class
