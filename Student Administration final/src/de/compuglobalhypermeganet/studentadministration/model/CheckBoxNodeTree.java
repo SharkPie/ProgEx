@@ -1,4 +1,4 @@
-package de.compuglobalhypermeganet.studentadministration.view;
+package de.compuglobalhypermeganet.studentadministration.model;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -12,8 +12,11 @@ import java.util.Vector;
 
 import javax.swing.AbstractCellEditor;
 import javax.swing.JCheckBox;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.event.ChangeEvent;
@@ -23,36 +26,53 @@ import javax.swing.tree.TreeCellEditor;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 
-public class CheckBoxNodeTreeSample {
-  public static void main(String args[]) {
-    JFrame frame = new JFrame("CheckBox Tree");
+public class CheckBoxNodeTree {
+  //public static void main(String args[]) {
+	
+	public void initTree() {
+    //JFrame frame = new JFrame("CheckBox Tree");
+    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
+	JPanel JTreePanel = new JPanel();
+	
+//    MyCheckBoxNode MyNode1[] = {
+//        new MyCheckBoxNode("entry 1.2, true", true) };
+//    
+//    MyCheckBoxNode MyNode2[] = {
+//        new MyCheckBoxNode("entry 2.1, true", true),
+//        new MyCheckBoxNode("entry 2.2, false", false),
+//        new MyCheckBoxNode("entry 2.3, true", true) };
+    
+    MyCheckBoxNode test = new MyCheckBoxNode("enroll", false);
+   
+//    Vector MyVector01 = new NamedVector("Kursname 01", MyNode1);
+//    Vector MyVector02 = new NamedVector("Kursname 02", MyNode2);
+    //Vector MyVectorTest = new NamedVector("Kursname 03", test);
 
-    CheckBoxNode accessibilityOptions[] = {
-        new CheckBoxNode(
-            "Move system caret with focus/selection changes", false),
-        new CheckBoxNode("Always expand alt text for images", true) };
-    CheckBoxNode browsingOptions[] = {
-        new CheckBoxNode("Notify when downloads complete", true),
-        new CheckBoxNode("Disable script debugging", true),
-        new CheckBoxNode("Use AutoComplete", true),
-        new CheckBoxNode("Browse in a new process", false) };
-    Vector accessVector = new NamedVector("Accessibility",
-        accessibilityOptions);
-    Vector browseVector = new NamedVector("Browsing", browsingOptions);
-    Object rootNodes[] = { accessVector, browseVector };
+    NamedVector MyNamedVectorArray[] = new NamedVector[20];
+    for (int i = 0; i < MyNamedVectorArray.length; i++) {
+		MyNamedVectorArray[i] = new NamedVector("Kursname "+i, test);
+	}
+
+    //Object rootNodes[] = { MyVector01, MyVector02 };
+    Object rootNodes[] = MyNamedVectorArray;
+
     Vector rootVector = new NamedVector("Root", rootNodes);
-    JTree tree = new JTree(rootVector);
+    
+    JTree MyTree = new JTree(rootVector);
 
     CheckBoxNodeRenderer renderer = new CheckBoxNodeRenderer();
-    tree.setCellRenderer(renderer);
+    MyTree.setCellRenderer(renderer);
 
-    tree.setCellEditor(new CheckBoxNodeEditor(tree));
-    tree.setEditable(true);
+    MyTree.setCellEditor(new CheckBoxNodeEditor(MyTree));
+    MyTree.setEditable(true);
 
-    JScrollPane scrollPane = new JScrollPane(tree);
-    frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-    frame.setSize(300, 150);
-    frame.setVisible(true);
+    JScrollPane scrollPane = new JScrollPane(MyTree);
+    //frame.add(JTreePanel);
+    //frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    //frame.setSize(300,400);
+    //frame.setVisible(true);
+    JTreePanel.add(scrollPane);
   }
 }
 
@@ -111,8 +131,8 @@ class CheckBoxNodeRenderer implements TreeCellRenderer {
       if ((value != null) && (value instanceof DefaultMutableTreeNode)) {
         Object userObject = ((DefaultMutableTreeNode) value)
             .getUserObject();
-        if (userObject instanceof CheckBoxNode) {
-          CheckBoxNode node = (CheckBoxNode) userObject;
+        if (userObject instanceof MyCheckBoxNode) {
+          MyCheckBoxNode node = (MyCheckBoxNode) userObject;
           leafRenderer.setText(node.getText());
           leafRenderer.setSelected(node.isSelected());
         }
@@ -140,7 +160,7 @@ class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEditor {
 
   public Object getCellEditorValue() {
     JCheckBox checkbox = renderer.getLeafRenderer();
-    CheckBoxNode checkBoxNode = new CheckBoxNode(checkbox.getText(),
+    MyCheckBoxNode checkBoxNode = new MyCheckBoxNode(checkbox.getText(),
         checkbox.isSelected());
     return checkBoxNode;
   }
@@ -156,7 +176,7 @@ class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEditor {
         if ((node != null) && (node instanceof DefaultMutableTreeNode)) {
           DefaultMutableTreeNode treeNode = (DefaultMutableTreeNode) node;
           Object userObject = treeNode.getUserObject();
-          returnValue = ((treeNode.isLeaf()) && (userObject instanceof CheckBoxNode));
+          returnValue = ((treeNode.isLeaf()) && (userObject instanceof MyCheckBoxNode));
         }
       }
     }
@@ -185,12 +205,11 @@ class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEditor {
   }
 }
 
-class CheckBoxNode {
+class MyCheckBoxNode {
   String text;
-
   boolean selected;
 
-  public CheckBoxNode(String text, boolean selected) {
+  public MyCheckBoxNode(String text, boolean selected) {
     this.text = text;
     this.selected = selected;
   }
@@ -216,6 +235,13 @@ class CheckBoxNode {
   }
 }
 
+
+
+//public Category(int max){ . . . }
+//Category [] categories = new Category[4];
+//categories[0] = new Category(10)
+
+
 class NamedVector extends Vector {
   String name;
 
@@ -224,12 +250,17 @@ class NamedVector extends Vector {
   }
 
   public NamedVector(String name, Object elements[]) {
-    this.name = name;
-    for (int i = 0, n = elements.length; i < n; i++) {
+	  this.name = name;
+	  for (int i = 0, n = elements.length; i < n; i++) {
       add(elements[i]);
     }
   }
 
+  public NamedVector(String name, Object element) {
+	    this.name = name;
+	    add(element);
+	  }
+  
   public String toString() {
     return "[" + name + "]";
   }
