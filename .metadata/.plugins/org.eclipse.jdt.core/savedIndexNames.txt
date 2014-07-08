@@ -18,4 +18,3 @@ INDEX VERSION 1.126+C:\Users\Dominik\Documents\GitHub\ProgEx\.metadata\.plugins\
 3549880408.index
 3224974857.index
 3926188048.index
-3449476666.index

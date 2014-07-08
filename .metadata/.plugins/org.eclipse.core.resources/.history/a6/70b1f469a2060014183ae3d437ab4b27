@@ -47,12 +47,12 @@ public class enrollWindow extends JFrame implements ActionListener{
 			pwd=eWpassword;
 			
 			
-			setsPane(new String [40][3]);
+			setsPane(new String [40][6]);
 			String[][] eeData = JdbcTemplate.getInstance().getEnrollWindow(usr, pwd);
 			setsPane(eeData);
 			
 
-				setLayout(new BorderLayout(100, 100));
+				//setLayout(new BorderLayout(100, 100));
 			
 				getEnrollWindow().setLayout(new GridLayout(5, 1, 10, 10));
 				add(enrollWindow);
@@ -60,9 +60,10 @@ public class enrollWindow extends JFrame implements ActionListener{
 				setTitle("Student Administration");		
 				setResizable(false);
 				setVisible(true);
-				getEnrollWindow().add(sPane);
-				getEnrollWindow().add(buttonEnrolling);
-				getEnrollWindow().add(buttonClose);
+				
+				getEnrollWindow().add(buttonEnrolling, BorderLayout.SOUTH);
+				getEnrollWindow().add(buttonClose, BorderLayout.SOUTH);
+				
 				
 				pack(); 
 			
@@ -109,7 +110,7 @@ public class enrollWindow extends JFrame implements ActionListener{
 		
 		
 		public void setsPane(String[][] data) {
-			String[] col_names = {"Course Name","ECTS", "Exam Type"};
+			String[] col_names = {"Course Name","Grade"};
 			JTable table = new JTable(data, col_names);
 			sPane = new JScrollPane( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 			sPane.setViewportView(table);
