@@ -28,12 +28,12 @@ import javax.swing.tree.TreePath;
 
 import sun.security.jca.GetInstance;
 
-public class CheckBoxNodeTreeSample {
+public class CheckBoxNodeTreeSample extends JTree {
   public static void main(String args[]) {
     JFrame frame = new JFrame("CheckBox Tree");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
-	JPanel JTreePanel = new JPanel();
+	//JPanel JTreePanel = new JPanel();
 	
 //    MyCheckBoxNode MyNode1[] = {
 //        new MyCheckBoxNode("entry 1.2, true", true) };
@@ -69,10 +69,10 @@ public class CheckBoxNodeTreeSample {
 
     JScrollPane scrollPane = new JScrollPane(MyTree);
     //frame.add(JTreePanel);
-    //frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
-    //frame.setSize(300,400);
-    //frame.setVisible(true);
-    JTreePanel.add(scrollPane);
+    frame.getContentPane().add(scrollPane, BorderLayout.CENTER);
+    frame.setSize(300,400);
+    frame.setVisible(true);
+    //JTreePanel.add(scrollPane);
   }
 }
 

@@ -39,7 +39,7 @@ public class enrollWindow extends JFrame implements ActionListener{
 	private buttonCL buttonEnrolling = new buttonCL("Enroll");
 	private buttonCL buttonClose = new buttonCL("Close");
 
-    public CheckBoxNodeTree MyTree = new CheckBoxNodeTree(); //nötig?!?
+    private CheckBoxNodeTree MyTree = new CheckBoxNodeTree(); //nötig?!?
 
 	private JScrollPane sPane;
 	public static String usr = null;
@@ -49,7 +49,7 @@ public class enrollWindow extends JFrame implements ActionListener{
 		//usr=eWusername;
 		//pwd=eWpassword;
 
-		setsPane(new String [40][4]);
+		setsPane(new String [40][3]);
 		//String[][] eeData = JdbcTemplate.getInstance().getEnrollWindow(usr, pwd);
 		String[][] eeData = JdbcTemplate.getInstance().getEnrollWindow(eWusername, eWpassword);
 		setsPane(eeData);
@@ -62,8 +62,8 @@ public class enrollWindow extends JFrame implements ActionListener{
 		setTitle("Student Administration");		
 		setResizable(false);
 		setVisible(true);
-		getEnrollWindow().add(sPane);
-
+		//getEnrollWindow().add(sPane);
+		getEnrollWindow().add(MyTree);
 		getEnrollWindow().add(buttonEnrolling);
 		getEnrollWindow().add(buttonClose);
 
@@ -78,6 +78,16 @@ public class enrollWindow extends JFrame implements ActionListener{
 
 	}
 
+	
+
+	public CheckBoxNodeTree getMyTree() {
+		return MyTree;
+	}
+
+	public void setMyTree(CheckBoxNodeTree myTree) {
+		MyTree = myTree;
+	}
+	
 	public JDesktopPane getEnrollWindow() {
 		return enrollWindow;
 	}
@@ -106,7 +116,7 @@ public class enrollWindow extends JFrame implements ActionListener{
 
 
 	public void setsPane(String[][] data) {
-		String[] col_names = {"Course Name","ECTS", "Exam Type", "Enroll"};
+		String[] col_names = {"Course Name","ECTS", "Exam Type"};
 		JTable table = new JTable(data, col_names);
 		sPane = new JScrollPane( JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		sPane.setViewportView(table);

@@ -26,35 +26,19 @@ import javax.swing.tree.TreeCellEditor;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreePath;
 
-public class CheckBoxNodeTree {
-  //public static void main(String args[]) {
+public class CheckBoxNodeTree extends JTree{
 	
-	public void initTree() {
-    //JFrame frame = new JFrame("CheckBox Tree");
-    //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public CheckBoxNodeTree() {
     
 	JPanel JTreePanel = new JPanel();
 	
-//    MyCheckBoxNode MyNode1[] = {
-//        new MyCheckBoxNode("entry 1.2, true", true) };
-//    
-//    MyCheckBoxNode MyNode2[] = {
-//        new MyCheckBoxNode("entry 2.1, true", true),
-//        new MyCheckBoxNode("entry 2.2, false", false),
-//        new MyCheckBoxNode("entry 2.3, true", true) };
-    
     MyCheckBoxNode test = new MyCheckBoxNode("enroll", false);
-   
-//    Vector MyVector01 = new NamedVector("Kursname 01", MyNode1);
-//    Vector MyVector02 = new NamedVector("Kursname 02", MyNode2);
-    //Vector MyVectorTest = new NamedVector("Kursname 03", test);
 
     NamedVector MyNamedVectorArray[] = new NamedVector[20];
     for (int i = 0; i < MyNamedVectorArray.length; i++) {
 		MyNamedVectorArray[i] = new NamedVector("Kursname "+i, test);
 	}
 
-    //Object rootNodes[] = { MyVector01, MyVector02 };
     Object rootNodes[] = MyNamedVectorArray;
 
     Vector rootVector = new NamedVector("Root", rootNodes);
@@ -234,12 +218,6 @@ class MyCheckBoxNode {
     return getClass().getName() + "[" + text + "/" + selected + "]";
   }
 }
-
-
-
-//public Category(int max){ . . . }
-//Category [] categories = new Category[4];
-//categories[0] = new Category(10)
 
 
 class NamedVector extends Vector {
